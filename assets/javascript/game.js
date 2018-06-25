@@ -1,10 +1,9 @@
+//user starts the game with 0 wins, 0 losses, and 9 guesses
 var wins = 0;
 var losses = 0;
 var guessesLeft = 9;
 
-// var userGuess = function letter (){
-
-//Possible letters that the computer can choose
+//Array of all letters of the alphabet that the computer can choose
 var alphabet = [
   "a",
   "b",
@@ -34,112 +33,51 @@ var alphabet = [
   "z"
 ];
 
+//Computer randomly chooses a letter from the above array
+var computerLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+//Function used to get the computer to choose a new letter (every time this function is run)
+var newComputerLetter = function() {
+  alphabet[Math.floor(Math.random() * alphabet.length)];
+};
+
+//Used to 'restart' game, so user has 9 guesses, guesses far is blank, and new computer chooses new letter
+function restart() {
+  guessesLeft = 9;
+  document.getElementById("guessesSoFar").innerHTML = "";
+  newComputerLetter();
+}
+
 // This function is run whenever the user presses a key.
 document.onkeyup = function(event) {
-  //A random letter is chosen by the computer
-  var computerLetter = alphabet[Math.floor(Math.random() * 25)];
-  // var computerLetter = alphabet[0];
-
   var userLetter = event.key;
-  console.log(computerLetter);
 
-  //The user's choice is compared to the computer's and there are several outcomes
-  // if (userLetter === computerLetter) {
-  //   // wins++;
-  //   document.getElementById("wins").innerHTML = wins++;
-  //   document.getElementById("guessesSoFar").innerHTML = "";
-  // } else {
-  //   //     guessesLeft--;
-  //   document.getElementById("guessesLeft").innerHTML = guessesLeft--;
-  //   //     // document.getElementById("losses").innerHTML = losses;
-  //   document.getElementById("guessesSoFar").innerHTML += userLetter + ", ";
-  //   if ((guessesLeft = 0)) {
-  //     document.getElementById("losses").innerHTML = losses++;
-  //     document.getElementById("guessesSoFar").innerHTML = "";
-  //   }
-  // }
-  // };
+  //This function is used to compare user's key press against every letter in the alphabet array
+  //Why does 'checkLetter' and 'userLetter' show as grey when this is uncommented!!!
+  //var checkLetter = function(userLetter){
+  //  if checkLetter != alphabet.every(userLetter);
+  //Essentially, this entire section should go inside of an if statement that says:
+  //"if (onkeyup isn't equal to a letter), then return/don't run the function"
 
-  // for (var guessesLeft = 9; guessesLeft > 0; guessesLeft--) {
-  //   if (userLetter === computerLetter) {
-  //     document.getElementById("wins").innerHTML = wins++;
-  //     document.getElementById("guessesSoFar").innerHTML = "";
-  //   } else {
-  //     document.getElementById("guessesLeft").innerHTML = guessesLeft - 1;
-  //     //     // document.getElementById("losses").innerHTML = losses;
-  //     document.getElementById("guessesSoFar").innerHTML += userLetter + ", ";
-  //   }
-  // }
+  //Guesses left decrements every time the user presses a key and the function is run
+  guessesLeft--;
 
-  //   if (userLetter === computerLetter) {
-  //     // wins++;
-  //     document.getElementById("wins").innerHTML = wins++;
-  //     document.getElementById("guessesSoFar").innerHTML = "";
-  //   } else if (userLetter != computerLetter) {
-  //     //     guessesLeft--;
-  //     if (guessesLeft > 0) {
-  //       document.getElementById("guessesLeft").innerHTML = guessesLeft--;
-  //       //     // document.getElementById("losses").innerHTML = losses;
-  //       document.getElementById("guessesSoFar").innerHTML += userLetter + ", ";
-  //     }
-  //   } else if (userLetter != computerLetter) {
-  //     if ((guessesLeft = 0)) {
-  //       document.getElementById("losses").innerHTML = losses++;
-  //       document.getElementById("guessesSoFar").innerHTML = "";
-  //       guessesLeft = 9;
-  //     }
-  //   }
-  // };
-
-  if (userLetter === computerLetter) {
-    // wins++;
-    document.getElementById("wins").innerHTML = wins++;
-    document.getElementById("guessesSoFar").innerHTML = "";
-  } else {
-    if (guessesLeft >= 1) {
-      //     guessesLeft--;
-      document.getElementById("guessesLeft").innerHTML = guessesLeft--;
-      //     // document.getElementById("losses").innerHTML = losses;
-      document.getElementById("guessesSoFar").innerHTML += userLetter + ", ";
-    } else if (guessesLeft == 0) {
-      document.getElementById("losses").innerHTML = losses++;
+  //If guesses are greater than 0
+  if (guessesLeft > 0) {
+    //and the user has guessed correctly, then increase the win counter and restart the game
+    if (userLetter === computerLetter) {
+      wins++;
+      document.getElementById("wins").innerHTML = wins;
       document.getElementById("guessesSoFar").innerHTML = "";
-      guessesLeft = 9;
-    }
+      restart();
+      //otherwise, show how many guesses they have left and display what they've guessed so far
+    } else document.getElementById("guessesLeft").innerHTML = guessesLeft;
+    document.getElementById("guessesSoFar").innerHTML += userLetter + ", ";
+    computerLetter;
+    //if the user has no more guesses left, then increase the loss counter and restart the game
+  } else if (guessesLeft == 0) {
+    losses++;
+    document.getElementById("losses").innerHTML = losses;
+    restart();
   }
-
-  // if (userLetter === computerLetter) {
-  //   // wins++;
-  //   document.getElementById("wins").innerHTML = wins++;
-  //   document.getElementById("guessesSoFar").innerHTML = "";
-  // } else if (userLetter != computerLetter) {
-  //   document.getElementById("guessesLeft").innerHTML = guessesLeft--;
-  //   document.getElementById("guessesSoFar").innerHTML += userLetter + ", ";
-  // }
 };
-// if (guessesLeft == 0) {
-//   losses++;
-//   document.getElementById("guessesSoFar").innerHTML = "";
-// }
-// } else if ((guessesLeft = 1 && userLetter != computerLetter)) {
-//   document.getElementById("losses").innerHTML = losses++;
-//   document.getElementById("guessesSoFar").innerHTML = "";
-//   guessesLeft = 9;
-// }
-
-// if (userLetter === computerLetter) {
-//   wins++;
-//   document.getElementById("guessesSoFar").innerHTML = "";
-// } else {
-//   guessesLeft--;
-//   document.getElementById("guessesLeft").innerHTML = guessesLeft;
-//   document.getElementById("guessesSoFar").innerHTML += userLetter + ", ";
-// }
-
-// if (guesses === 0) {
-//   losses++;
-// }
-
-// document.getElementById("wins").innerHTML = wins;
-// document.getElementById("losses").innerHTML = losses;
-// };
