@@ -1,0 +1,17 @@
+body {
+  background-image: url("../images/mysteriousgypsy.jpeg");
+  background-size: cover;
+}
+
+#title {
+  text-align: center;
+}
+
+#instructions {
+  text-align: center;
+}
+
+.container {
+  margin-top: 90px;
+  width: 700px;
+}
