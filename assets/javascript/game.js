@@ -37,9 +37,11 @@ var alphabet = [
 var computerLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
 
 //Function used to get the computer to choose a new letter (every time this function is run)
-var newComputerLetter = function() {
+var newComputerLetter = function () {
   alphabet[Math.floor(Math.random() * alphabet.length)];
 };
+
+console.log(newComputerLetter);
 
 //Used to 'restart' game, so user has 9 guesses, guesses far is blank, and new computer chooses new letter
 function restart() {
@@ -49,7 +51,7 @@ function restart() {
 }
 
 // This function is run whenever the user presses a key.
-document.onkeyup = function(event) {
+document.onkeyup = function (event) {
   var userLetter = event.key;
 
   //This function is used to compare user's key press against every letter in the alphabet array
